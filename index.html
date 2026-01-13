@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Parking System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              parking: {
+                50: "#f0f9ff",
+                100: "#e0f2fe",
+                200: "#bae6fd",
+                300: "#7dd3fc",
+                400: "#38bdf8",
+                500: "#0ea5e9",
+                600: "#0284c7",
+                700: "#0369a1",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-parking-50 via-white to-parking-100 min-h-screen"
+  >
+    <!-- LOGIN FORM -->
+    <div
+      id="loginForm"
+      class="min-h-screen flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md border border-parking-200"
+      >
+        <div class="text-center mb-8">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-parking-400 to-parking-600 rounded-full mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">Smart Parking System</h2>
+          <p class="text-gray-500 mt-2">Login untuk monitoring area parkir</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              placeholder="Masukkan email admin"
+              class="w-full px-4 py-3 border border-parking-300 rounded-lg focus:ring-2 focus:ring-parking-500 focus:border-transparent transition-all outline-none"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Password</label
+            >
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                placeholder="Masukkan password admin"
+                class="w-full px-4 py-3 pr-12 border border-parking-300 rounded-lg focus:ring-2 focus:ring-parking-500 focus:border-transparent transition-all outline-none"
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <svg
+                  id="eyeOpen"
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  ></path>
+                </svg>
+                <svg
+                  id="eyeClosed"
+                  class="w-5 h-5 hidden"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button
+            id="loginBtn"
+            class="w-full bg-gradient-to-r from-parking-500 to-parking-600 text-white py-3 rounded-lg font-semibold hover:from-parking-600 hover:to-parking-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="hidden min-h-screen p-6">
+      <!-- Header -->
+      <div class="max-w-7xl mx-auto mb-8">
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-parking-400 to-parking-600 rounded-full flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h1 class="text-3xl font-bold text-gray-800">
+                  Smart Parking System
+                </h1>
+                <p class="text-gray-500">Real-time Parking Monitoring</p>
+              </div>
+            </div>
+            <button
+              id="logoutBtn"
+              class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parking Status Cards -->
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Total Slots -->
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">
+              Total Slot Parkir
+            </h3>
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-center py-6">
+            <div
+              id="totalSlots"
+              class="text-5xl font-bold text-parking-600 mb-2"
+            >
+              --
+            </div>
+            <div
+              class="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-medium"
+            >
+              Slot Total
+            </div>
+          </div>
+        </div>
+
+        <!-- Available Slots -->
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">Slot Tersedia</h3>
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-center py-6">
+            <div
+              id="availableSlots"
+              class="text-5xl font-bold text-green-600 mb-2"
+            >
+              --
+            </div>
+            <div
+              class="inline-block px-4 py-2 rounded-full bg-green-100 text-green-700 font-medium"
+            >
+              <span id="availableStatus">Tersedia</span>
+            </div>
+          </div>
+          <div class="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              id="availableBar"
+              class="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Occupied Slots -->
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">Slot Terisi</h3>
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-center py-6">
+            <div
+              id="occupiedSlots"
+              class="text-5xl font-bold text-red-600 mb-2"
+            >
+              --
+            </div>
+            <div
+              class="inline-block px-4 py-2 rounded-full bg-red-100 text-red-700 font-medium"
+            >
+              <span id="occupiedStatus">Terisi</span>
+            </div>
+          </div>
+          <div class="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              id="occupiedBar"
+              class="h-full bg-gradient-to-r from-red-400 to-red-600 transition-all"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Individual Parking Slots -->
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200"
+        >
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">
+            Detail Slot Parkir
+          </h2>
+          <div
+            id="parkingSlots"
+            class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          >
+            <!-- Slot akan di-generate oleh JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+      // Firebase Configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCBex9P737Ewq69xrdVuSfh_ZTAsjNqYGc",
+        authDomain: "belajar-iot-c610a.firebaseapp.com",
+        databaseURL:
+          "https://belajar-iot-c610a-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "belajar-iot-c610a",
+        storageBucket: "belajar-iot-c610a.firebasestorage.app",
+        messagingSenderId: "672088058976",
+        appId: "1:672088058976:web:9c03f32dc219f35d39e705",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getDatabase(app);
+
+      const loginForm = document.getElementById("loginForm");
+      const dashboard = document.getElementById("dashboard");
+
+      // TOGGLE PASSWORD VISIBILITY
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", () => {
+          const passwordInput = document.getElementById("password");
+          const eyeOpen = document.getElementById("eyeOpen");
+          const eyeClosed = document.getElementById("eyeClosed");
+
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeOpen.classList.add("hidden");
+            eyeClosed.classList.remove("hidden");
+          } else {
+            passwordInput.type = "password";
+            eyeOpen.classList.remove("hidden");
+            eyeClosed.classList.add("hidden");
+          }
+        });
+
+      // LOGIN
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("password").value;
+
+        // Validasi kredensial
+        if (email === "admin@gmail.com" && pass === "admin123") {
+          signInWithEmailAndPassword(auth, email, pass)
+            .then(() => {
+              loginForm.style.display = "none";
+              dashboard.classList.remove("hidden");
+              listenToParkingData();
+            })
+            .catch((err) => {
+              alert("Login gagal: " + err.message);
+            });
+        } else {
+          alert(
+            "Email atau password salah!\nGunakan:\nEmail: admin@parking.com\nPassword: admin123"
+          );
+        }
+      });
+
+      // LOGOUT
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        signOut(auth).then(() => {
+          dashboard.classList.add("hidden");
+          loginForm.style.display = "flex";
+        });
+      });
+
+      // LISTEN TO PARKING DATA
+      function listenToParkingData() {
+        const parkingRef = ref(db, "parking/slots");
+
+        onValue(parkingRef, (snapshot) => {
+          const slots = snapshot.val() || {};
+          updateParkingDashboard(slots);
+        });
+      }
+
+      function updateParkingDashboard(slots) {
+        const slotsArray = Object.values(slots);
+        const totalSlots = slotsArray.length;
+        const occupiedSlots = slotsArray.filter((slot) => slot.occupied).length;
+        const availableSlots = totalSlots - occupiedSlots;
+
+        // Update summary cards
+        document.getElementById("totalSlots").innerText = totalSlots;
+        document.getElementById("availableSlots").innerText = availableSlots;
+        document.getElementById("occupiedSlots").innerText = occupiedSlots;
+
+        // Update progress bars
+        const availablePercentage =
+          totalSlots > 0 ? (availableSlots / totalSlots) * 100 : 0;
+        const occupiedPercentage =
+          totalSlots > 0 ? (occupiedSlots / totalSlots) * 100 : 0;
+
+        document.getElementById("availableBar").style.width =
+          availablePercentage + "%";
+        document.getElementById("occupiedBar").style.width =
+          occupiedPercentage + "%";
+
+        // Update status text
+        if (availableSlots === 0) {
+          document.getElementById("availableStatus").innerText = "🔴 Penuh";
+        } else if (availableSlots < totalSlots * 0.3) {
+          document.getElementById("availableStatus").innerText = "🟡 Terbatas";
+        } else {
+          document.getElementById("availableStatus").innerText = "🟢 Tersedia";
+        }
+
+        if (occupiedSlots === totalSlots) {
+          document.getElementById("occupiedStatus").innerText = "⚠️ Penuh";
+        } else {
+          document.getElementById("occupiedStatus").innerText = "Terisi";
+        }
+
+        // Render individual slots
+        renderParkingSlots(slots);
+      }
+
+      function renderParkingSlots(slots) {
+        const container = document.getElementById("parkingSlots");
+        container.innerHTML = "";
+
+        Object.entries(slots).forEach(([slotId, slotData]) => {
+          const slotDiv = document.createElement("div");
+          const isOccupied = slotData.occupied;
+
+          slotDiv.className = `p-4 rounded-xl border-2 transition-all transform hover:scale-105 ${
+            isOccupied
+              ? "bg-red-50 border-red-300 shadow-red-200"
+              : "bg-green-50 border-green-300 shadow-green-200"
+          } shadow-md`;
+
+          slotDiv.innerHTML = `
+            <div class="text-center">
+              <div class="text-3xl mb-2">
+                ${isOccupied ? "🚗" : "🅿️"}
+              </div>
+              <div class="font-bold text-gray-800 mb-1">
+                Slot ${slotData.slotNumber || slotId}
+              </div>
+              <div class="text-sm font-semibold ${
+                isOccupied ? "text-red-600" : "text-green-600"
+              }">
+                ${isOccupied ? "TERISI" : "KOSONG"}
+              </div>
+            </div>
+          `;
+
+          container.appendChild(slotDiv);
+        });
+      }
+    </script>
+  </body>
+</html>
