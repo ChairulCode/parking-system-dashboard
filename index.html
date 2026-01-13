@@ -5,151 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Parking System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              parking: {
-                50: "#f0f9ff",
-                100: "#e0f2fe",
-                200: "#bae6fd",
-                300: "#7dd3fc",
-                400: "#38bdf8",
-                500: "#0ea5e9",
-                600: "#0284c7",
-                700: "#0369a1",
-              },
-            },
-          },
-        },
-      };
-    </script>
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+        }
+      }
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+    </style>
   </head>
   <body
-    class="bg-gradient-to-br from-parking-50 via-white to-parking-100 min-h-screen"
+    class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 min-h-screen"
   >
-    <!-- LOGIN FORM -->
-    <div
-      id="loginForm"
-      class="min-h-screen flex items-center justify-center p-4"
-    >
-      <div
-        class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md border border-parking-200"
-      >
-        <div class="text-center mb-8">
-          <div
-            class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-parking-400 to-parking-600 rounded-full mb-4"
-          >
-            <svg
-              class="w-8 h-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-              ></path>
-            </svg>
-          </div>
-          <h2 class="text-3xl font-bold text-gray-800">Smart Parking System</h2>
-          <p class="text-gray-500 mt-2">Login untuk monitoring area parkir</p>
-        </div>
-
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="email"
-              placeholder="Masukkan email admin"
-              class="w-full px-4 py-3 border border-parking-300 rounded-lg focus:ring-2 focus:ring-parking-500 focus:border-transparent transition-all outline-none"
-            />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Password</label
-            >
-            <div class="relative">
-              <input
-                type="password"
-                id="password"
-                placeholder="Masukkan password admin"
-                class="w-full px-4 py-3 pr-12 border border-parking-300 rounded-lg focus:ring-2 focus:ring-parking-500 focus:border-transparent transition-all outline-none"
-              />
-              <button
-                type="button"
-                id="togglePassword"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
-              >
-                <svg
-                  id="eyeOpen"
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  ></path>
-                </svg>
-                <svg
-                  id="eyeClosed"
-                  class="w-5 h-5 hidden"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <button
-            id="loginBtn"
-            class="w-full bg-gradient-to-r from-parking-500 to-parking-600 text-white py-3 rounded-lg font-semibold hover:from-parking-600 hover:to-parking-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Login
-          </button>
-        </div>
-      </div>
-    </div>
-
     <!-- DASHBOARD -->
-    <div id="dashboard" class="hidden min-h-screen p-6">
+    <div id="dashboard" class="min-h-screen p-4 sm:p-6 lg:p-8">
       <!-- Header -->
-      <div class="max-w-7xl mx-auto mb-8">
+      <div class="max-w-7xl mx-auto mb-6 sm:mb-8">
         <div
-          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200"
+          class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-4 sm:p-6 border border-white/20"
         >
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            <div class="flex items-center space-x-3 sm:space-x-4">
               <div
-                class="w-12 h-12 bg-gradient-to-br from-parking-400 to-parking-600 rounded-full flex items-center justify-center"
+                class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/50 float-animation"
               >
                 <svg
-                  class="w-6 h-6 text-white"
+                  class="w-6 h-6 sm:w-7 sm:h-7 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -163,37 +64,54 @@
                 </svg>
               </div>
               <div>
-                <h1 class="text-3xl font-bold text-gray-800">
-                  Smart Parking System
+                <h1
+                  class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"
+                >
+                  Smart Parking
                 </h1>
-                <p class="text-gray-500">Real-time Parking Monitoring</p>
+                <p class="text-blue-200 text-sm sm:text-base">
+                  Real-time Monitoring
+                </p>
               </div>
             </div>
-            <button
-              id="logoutBtn"
-              class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md hover:shadow-lg"
+            <div
+              class="flex items-center space-x-3 bg-white/10 px-4 py-2 rounded-xl border border-white/20"
             >
-              Logout
-            </button>
+              <div class="text-right">
+                <div class="text-xs sm:text-sm text-blue-200">
+                  System Status
+                </div>
+                <div class="flex items-center space-x-2">
+                  <div
+                    class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"
+                  ></div>
+                  <span class="text-xs sm:text-sm font-semibold text-green-300"
+                    >Online</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Parking Status Cards -->
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8"
+      >
         <!-- Total Slots -->
         <div
-          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+          class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-5 sm:p-6 border border-white/20 hover:bg-white/15 transition-all transform hover:scale-105 hover:shadow-blue-500/20"
         >
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">
-              Total Slot Parkir
+            <h3 class="text-lg sm:text-xl font-semibold text-white">
+              Total Slots
             </h3>
             <div
-              class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center"
+              class="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/50"
             >
               <svg
-                class="w-6 h-6 text-white"
+                class="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -207,32 +125,34 @@
               </svg>
             </div>
           </div>
-          <div class="text-center py-6">
+          <div class="text-center py-4 sm:py-6">
             <div
               id="totalSlots"
-              class="text-5xl font-bold text-parking-600 mb-2"
+              class="text-4xl sm:text-5xl font-bold text-blue-300 mb-2"
             >
               --
             </div>
             <div
-              class="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-medium"
+              class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-blue-500/30 text-blue-100 font-medium text-sm backdrop-blur-sm border border-blue-400/30"
             >
-              Slot Total
+              Parking Spaces
             </div>
           </div>
         </div>
 
         <!-- Available Slots -->
         <div
-          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+          class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-5 sm:p-6 border border-white/20 hover:bg-white/15 transition-all transform hover:scale-105 hover:shadow-green-500/20"
         >
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Slot Tersedia</h3>
+            <h3 class="text-lg sm:text-xl font-semibold text-white">
+              Tersedia
+            </h3>
             <div
-              class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center"
+              class="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/50"
             >
               <svg
-                class="w-6 h-6 text-white"
+                class="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -246,23 +166,25 @@
               </svg>
             </div>
           </div>
-          <div class="text-center py-6">
+          <div class="text-center py-4 sm:py-6">
             <div
               id="availableSlots"
-              class="text-5xl font-bold text-green-600 mb-2"
+              class="text-4xl sm:text-5xl font-bold text-green-300 mb-2"
             >
               --
             </div>
             <div
-              class="inline-block px-4 py-2 rounded-full bg-green-100 text-green-700 font-medium"
+              class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-green-500/30 text-green-100 font-medium text-sm backdrop-blur-sm border border-green-400/30"
             >
-              <span id="availableStatus">Tersedia</span>
+              <span id="availableStatus">Ready to Park</span>
             </div>
           </div>
-          <div class="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            class="mt-4 h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm"
+          >
             <div
               id="availableBar"
-              class="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all"
+              class="h-full bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-500 shadow-lg shadow-green-500/50"
               style="width: 0%"
             ></div>
           </div>
@@ -270,15 +192,15 @@
 
         <!-- Occupied Slots -->
         <div
-          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200 hover:shadow-2xl transition-all transform hover:-translate-y-1"
+          class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-5 sm:p-6 border border-white/20 hover:bg-white/15 transition-all transform hover:scale-105 hover:shadow-red-500/20 sm:col-span-2 lg:col-span-1"
         >
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Slot Terisi</h3>
+            <h3 class="text-lg sm:text-xl font-semibold text-white">Terisi</h3>
             <div
-              class="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center"
+              class="w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-red-400 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-500/50"
             >
               <svg
-                class="w-6 h-6 text-white"
+                class="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -292,23 +214,25 @@
               </svg>
             </div>
           </div>
-          <div class="text-center py-6">
+          <div class="text-center py-4 sm:py-6">
             <div
               id="occupiedSlots"
-              class="text-5xl font-bold text-red-600 mb-2"
+              class="text-4xl sm:text-5xl font-bold text-red-300 mb-2"
             >
               --
             </div>
             <div
-              class="inline-block px-4 py-2 rounded-full bg-red-100 text-red-700 font-medium"
+              class="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-red-500/30 text-red-100 font-medium text-sm backdrop-blur-sm border border-red-400/30"
             >
-              <span id="occupiedStatus">Terisi</span>
+              <span id="occupiedStatus">In Use</span>
             </div>
           </div>
-          <div class="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            class="mt-4 h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm"
+          >
             <div
               id="occupiedBar"
-              class="h-full bg-gradient-to-r from-red-400 to-red-600 transition-all"
+              class="h-full bg-gradient-to-r from-red-400 to-rose-500 transition-all duration-500 shadow-lg shadow-red-500/50"
               style="width: 0%"
             ></div>
           </div>
@@ -318,28 +242,33 @@
       <!-- Individual Parking Slots -->
       <div class="max-w-7xl mx-auto">
         <div
-          class="bg-white rounded-2xl shadow-xl p-6 border border-parking-200"
+          class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-4 sm:p-6 border border-white/20"
         >
-          <h2 class="text-2xl font-bold text-gray-800 mb-6">
-            Detail Slot Parkir
+          <h2
+            class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center"
+          >
+            <span class="mr-2">🅿️</span> Parking Slots Detail
           </h2>
           <div
             id="parkingSlots"
-            class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-          >
-            <!-- Slot akan di-generate oleh JavaScript -->
-          </div>
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="max-w-7xl mx-auto text-center py-12">
+        <div class="inline-block">
+          <div
+            class="w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"
+          ></div>
+          <p class="text-white mt-4">Loading parking data...</p>
         </div>
       </div>
     </div>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import {
-        getAuth,
-        signInWithEmailAndPassword,
-        signOut,
-      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
       import {
         getDatabase,
         ref,
@@ -359,70 +288,43 @@
       };
 
       const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
       const db = getDatabase(app);
 
-      const loginForm = document.getElementById("loginForm");
-      const dashboard = document.getElementById("dashboard");
-
-      // TOGGLE PASSWORD VISIBILITY
-      document
-        .getElementById("togglePassword")
-        .addEventListener("click", () => {
-          const passwordInput = document.getElementById("password");
-          const eyeOpen = document.getElementById("eyeOpen");
-          const eyeClosed = document.getElementById("eyeClosed");
-
-          if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeOpen.classList.add("hidden");
-            eyeClosed.classList.remove("hidden");
-          } else {
-            passwordInput.type = "password";
-            eyeOpen.classList.remove("hidden");
-            eyeClosed.classList.add("hidden");
-          }
-        });
-
-      // LOGIN
-      document.getElementById("loginBtn").addEventListener("click", () => {
-        const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
-
-        // Validasi kredensial
-        if (email === "admin@gmail.com" && pass === "admin123") {
-          signInWithEmailAndPassword(auth, email, pass)
-            .then(() => {
-              loginForm.style.display = "none";
-              dashboard.classList.remove("hidden");
-              listenToParkingData();
-            })
-            .catch((err) => {
-              alert("Login gagal: " + err.message);
-            });
-        } else {
-          alert(
-            "Email atau password salah!\nGunakan:\nEmail: admin@parking.com\nPassword: admin123"
-          );
-        }
-      });
-
-      // LOGOUT
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        signOut(auth).then(() => {
-          dashboard.classList.add("hidden");
-          loginForm.style.display = "flex";
-        });
-      });
+      // AUTO-START: Langsung listen ke data parkir saat halaman dimuat
+      listenToParkingData();
 
       // LISTEN TO PARKING DATA
       function listenToParkingData() {
         const parkingRef = ref(db, "parking/slots");
+        const loadingState = document.getElementById("loadingState");
 
-        onValue(parkingRef, (snapshot) => {
-          const slots = snapshot.val() || {};
-          updateParkingDashboard(slots);
-        });
+        onValue(
+          parkingRef,
+          (snapshot) => {
+            const slots = snapshot.val() || {};
+
+            // Hide loading state
+            if (loadingState) {
+              loadingState.style.display = "none";
+            }
+
+            updateParkingDashboard(slots);
+          },
+          (error) => {
+            console.error("Error fetching data:", error);
+            if (loadingState) {
+              loadingState.innerHTML = `
+              <div class="text-red-400">
+                <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-lg font-semibold">Failed to load parking data</p>
+                <p class="text-sm mt-2">Please check your connection</p>
+              </div>
+            `;
+            }
+          }
+        );
       }
 
       function updateParkingDashboard(slots) {
@@ -447,19 +349,30 @@
         document.getElementById("occupiedBar").style.width =
           occupiedPercentage + "%";
 
-        // Update status text
+        // Update status text with animation
+        const availableStatusEl = document.getElementById("availableStatus");
+        const occupiedStatusEl = document.getElementById("occupiedStatus");
+
         if (availableSlots === 0) {
-          document.getElementById("availableStatus").innerText = "🔴 Penuh";
+          availableStatusEl.innerText = "🔴 Full";
+          availableStatusEl.parentElement.className =
+            "inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-red-500/30 text-red-100 font-medium text-sm backdrop-blur-sm border border-red-400/30";
         } else if (availableSlots < totalSlots * 0.3) {
-          document.getElementById("availableStatus").innerText = "🟡 Terbatas";
+          availableStatusEl.innerText = "🟡 Limited";
+          availableStatusEl.parentElement.className =
+            "inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-yellow-500/30 text-yellow-100 font-medium text-sm backdrop-blur-sm border border-yellow-400/30";
         } else {
-          document.getElementById("availableStatus").innerText = "🟢 Tersedia";
+          availableStatusEl.innerText = "🟢 Ready";
+          availableStatusEl.parentElement.className =
+            "inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-green-500/30 text-green-100 font-medium text-sm backdrop-blur-sm border border-green-400/30";
         }
 
         if (occupiedSlots === totalSlots) {
-          document.getElementById("occupiedStatus").innerText = "⚠️ Penuh";
+          occupiedStatusEl.innerText = "⚠️ All Full";
+        } else if (occupiedSlots === 0) {
+          occupiedStatusEl.innerText = "Empty";
         } else {
-          document.getElementById("occupiedStatus").innerText = "Terisi";
+          occupiedStatusEl.innerText = "In Use";
         }
 
         // Render individual slots
@@ -470,28 +383,37 @@
         const container = document.getElementById("parkingSlots");
         container.innerHTML = "";
 
-        Object.entries(slots).forEach(([slotId, slotData]) => {
+        // Sort slots by slot number
+        const sortedSlots = Object.entries(slots).sort((a, b) => {
+          const numA = parseInt(a[1].slotNumber || a[0]);
+          const numB = parseInt(b[1].slotNumber || b[0]);
+          return numA - numB;
+        });
+
+        sortedSlots.forEach(([slotId, slotData]) => {
           const slotDiv = document.createElement("div");
           const isOccupied = slotData.occupied;
 
-          slotDiv.className = `p-4 rounded-xl border-2 transition-all transform hover:scale-105 ${
+          slotDiv.className = `p-3 sm:p-4 rounded-2xl border-2 transition-all duration-300 transform hover:scale-110 cursor-pointer ${
             isOccupied
-              ? "bg-red-50 border-red-300 shadow-red-200"
-              : "bg-green-50 border-green-300 shadow-green-200"
-          } shadow-md`;
+              ? "bg-red-500/20 border-red-400/50 hover:bg-red-500/30 backdrop-blur-sm shadow-lg shadow-red-500/30"
+              : "bg-green-500/20 border-green-400/50 hover:bg-green-500/30 backdrop-blur-sm shadow-lg shadow-green-500/30"
+          }`;
 
           slotDiv.innerHTML = `
             <div class="text-center">
-              <div class="text-3xl mb-2">
+              <div class="text-3xl sm:text-4xl mb-2 transition-transform duration-300 transform hover:scale-125">
                 ${isOccupied ? "🚗" : "🅿️"}
               </div>
-              <div class="font-bold text-gray-800 mb-1">
+              <div class="font-bold text-white mb-1 text-sm sm:text-base">
                 Slot ${slotData.slotNumber || slotId}
               </div>
-              <div class="text-sm font-semibold ${
-                isOccupied ? "text-red-600" : "text-green-600"
+              <div class="text-xs sm:text-sm font-bold px-2 py-1 rounded-full ${
+                isOccupied
+                  ? "text-red-200 bg-red-600/40"
+                  : "text-green-200 bg-green-600/40"
               }">
-                ${isOccupied ? "TERISI" : "KOSONG"}
+                ${isOccupied ? "OCCUPIED" : "AVAILABLE"}
               </div>
             </div>
           `;
